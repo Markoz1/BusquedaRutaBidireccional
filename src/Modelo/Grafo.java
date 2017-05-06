@@ -112,13 +112,13 @@ public class Grafo {
         listaAuxI.add(nodoInicio);
         listaAuxF.add(nodoFin);
         
-        ArrayList<Nodo> nodosAdyacentesInicio = getNodosAdyacentes(listaAuxI);
-        listaAuxI.clear();
         while (!termino) {            
             
             int x = 0;
-            int y = 0;   
-                
+            int y = 0;  
+            
+            ArrayList<Nodo> nodosAdyacentesInicio = getNodosAdyacentes(listaAuxI);
+            listaAuxI.clear();    
             while ( x < nodosAdyacentesInicio.size() ) {
                 
                 Nodo nodoActualInicio = nodosAdyacentesInicio.get(x);
