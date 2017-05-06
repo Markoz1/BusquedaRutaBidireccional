@@ -98,6 +98,81 @@ public class Grafo {
             }
         }
     }
+	public void busquedaBidireccional2(int inicio, int fin){
+        
+        //Se toma el nodo inicio y final
+        Nodo nodoInicio = listaNodos.get(inicio);
+        Nodo nodoFin = listaNodos.get(fin);
+        boolean cruzeRutasInicioFin = false;
+        boolean termino = false;
+        
+        ArrayList<Nodo> listaAuxI = new ArrayList<Nodo>();
+        ArrayList<Nodo> listaAuxF = new ArrayList<Nodo>();
+        
+        listaAuxI.add(nodoInicio);
+        listaAuxF.add(nodoFin);
+        
+        ArrayList<Nodo> nodosAdyacentesInicio = getNodosAdyacentes(listaAuxI);
+        listaAuxI.clear();
+        while (!termino) {            
+            
+            int x = 0;
+            int y = 0;   
+                
+            while ( x < nodosAdyacentesInicio.size() ) {
+                
+                Nodo nodoActualInicio = nodosAdyacentesInicio.get(x);
+                
+                listaAuxI.add(nodoActualInicio);
+                
+                nodoActualInicio.setVisitadoInicio(true);
+                listaNodos.remove(nodoActualInicio.getIndice());
+                listaNodos.add(nodoActualInicio.getIndice(), nodoActualInicio);
+                
+                rutaIni.add(nodoActualInicio);
+                
+                if ( (nodoActualInicio.isVisitadoInicio()) && ( nodoActualInicio.isVisitadoFin() )) {
+                    cruzeRutasInicioFin = true;
+                }
+                x++;
+            }
+            if(cruzeRutasInicioFin){
+            	termino = true;
+            }
+            else{
+            	ArrayList<Nodo> nodosAdyacentesFin = getNodosAdyacentes(listaAuxF);
+            	listaAuxF.clear();
+            	while ( y < nodosAdyacentesFin.size() ) {
+                    
+                    Nodo nodoActualFin = nodosAdyacentesFin.get(y);
+                    
+                    listaAuxF.add(nodoActualFin);
+                    
+                    nodoActualFin.setVisitadoFin(true);
+                    listaNodos.remove(nodoActualFin.getIndice());
+                    listaNodos.add(nodoActualFin.getIndice(), nodoActualFin);
+                    
+                    rutaFin.add(nodoActualFin);
+                    
+                    if ( (nodoActualFin.isVisitadoInicio()) && ( nodoActualFin.isVisitadoFin() )) {
+                        cruzeRutasInicioFin = true;
+                    }
+                    y++;
+                }
+            	if(cruzeRutasInicioFin){
+            		termino = true;
+            	}
+            	
+            }
+                
+        }
+        if (termino) {
+			/*
+			 * devolver camino de busqueda desde inicio a final
+			 * 
+			 */
+		}
+    }
 	
 	private ArrayList<Nodo> getNodosAdyacentes( ArrayList<Nodo> nodo, int n ) {
         ArrayList<Nodo> res = new ArrayList<Nodo>();
@@ -106,6 +181,11 @@ public class Grafo {
                 res.add(listaNodos.get(i));
             }
         }
+        return res;
+    }
+	private ArrayList<Nodo> getNodosAdyacentes( ArrayList<Nodo> nodos) {
+        ArrayList<Nodo> res = new ArrayList<Nodo>();
+        //añadir a lista res todos los nodos adyacentes de cada nodo q contenga la lista nodos
         return res;
     }
 	/*
