@@ -29,6 +29,7 @@ public class Grafo {
             for (int i = 0; i < colNodo; i++) {
                 int adyacencia = nodo.getNodosCercanos()[i];
                 matrizAdyacencia[filNodo][adyacencia] = 1;
+                matrizAdyacencia[adyacencia][filNodo] = 1;
             }
             nodo.setIndice(filNodo);
         }
@@ -115,9 +116,9 @@ public class Grafo {
         while (!termino) {            
             
             int x = 0;
-            int y = 0;  
+              
             
-            ArrayList<Nodo> nodosAdyacentesInicio = getNodosAdyacentes(listaAuxI);
+            ArrayList<Nodo> nodosAdyacentesInicio = getNodosAdyacentes(listaAuxI);//DE INCIO A FIN
             listaAuxI.clear();    
             while ( x < nodosAdyacentesInicio.size() ) {
                 
@@ -129,7 +130,7 @@ public class Grafo {
                 listaNodos.remove(nodoActualInicio.getIndice());
                 listaNodos.add(nodoActualInicio.getIndice(), nodoActualInicio);
                 
-                rutaIni.add(nodoActualInicio);
+                rutaIni.add(nodoActualInicio);//AÑADIR NODO PREDECESOR+NODOACTUAL
                 
                 if ( (nodoActualInicio.isVisitadoInicio()) && ( nodoActualInicio.isVisitadoFin() )) {
                     cruzeRutasInicioFin = true;
@@ -140,8 +141,9 @@ public class Grafo {
             	termino = true;
             }
             else{
-            	ArrayList<Nodo> nodosAdyacentesFin = getNodosAdyacentes(listaAuxF);
+            	ArrayList<Nodo> nodosAdyacentesFin = getNodosAdyacentes(listaAuxF);//DE FIN A INICIO
             	listaAuxF.clear();
+            	int y = 0;
             	while ( y < nodosAdyacentesFin.size() ) {
                     
                     Nodo nodoActualFin = nodosAdyacentesFin.get(y);
@@ -152,7 +154,7 @@ public class Grafo {
                     listaNodos.remove(nodoActualFin.getIndice());
                     listaNodos.add(nodoActualFin.getIndice(), nodoActualFin);
                     
-                    rutaFin.add(nodoActualFin);
+                    rutaFin.add(nodoActualFin);//AÑADIR NODO SUCESOR+NODOACTUAL
                     
                     if ( (nodoActualFin.isVisitadoInicio()) && ( nodoActualFin.isVisitadoFin() )) {
                         cruzeRutasInicioFin = true;
@@ -188,6 +190,11 @@ public class Grafo {
         //añadir a lista res todos los nodos adyacentes de cada nodo q contenga la lista nodos
         return res;
     }
+	private ArrayList<Integer> getIndiceAdyacentes( ArrayList<Nodo> nodos) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        //añadir a lista res todos los nodos adyacentes de cada nodo q contenga la lista nodos
+        return res;
+    }
 	/*
 	 * solo para ver como recorre el grafo
 	 */
@@ -196,5 +203,4 @@ public class Grafo {
             System.out.println(listaNodos.get(i).getNombre()+" ("+listaNodos.get(i).getIndice()+")"+" vecinos:"+listaNodos.get(i).getNodosCercanosCadena());
         }
     }
-
 }
