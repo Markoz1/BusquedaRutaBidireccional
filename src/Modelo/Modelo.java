@@ -6,6 +6,8 @@ public class Modelo {
 	public Modelo() {
 		this.plazas = new Grafo();
 		creacionPlazas();
+		
+		this.plazas.busquedaBidireccional2(0, 3);
 	}
 
 	private void creacionPlazas() {
@@ -26,6 +28,7 @@ public class Modelo {
 		this.plazas.insertarNodo(nodo4);
 		this.plazas.insertarNodo(nodo5);
 		this.plazas.insertarNodo(nodo6);
+		this.plazas.busquedaBidireccional2(0, 3);
 	}
 	public Grafo getPlazas() {
 		return plazas;
